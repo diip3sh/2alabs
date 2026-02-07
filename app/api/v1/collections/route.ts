@@ -10,10 +10,7 @@ export async function POST(request: NextRequest) {
     const sessionId = request.cookies.get("session_id")?.value;
 
     if (!sessionId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const response = await fetch(`${API_BASE_URL}/api/v1/collections`, {
@@ -43,10 +40,7 @@ export async function GET(request: NextRequest) {
     const sessionId = request.cookies.get("session_id")?.value;
 
     if (!sessionId) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const response = await fetch(`${API_BASE_URL}/api/v1/collections`, {

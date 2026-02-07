@@ -79,7 +79,9 @@ export async function updateCollection(
   return data;
 }
 
-export async function deleteCollection(id: string): Promise<{ status: string }> {
+export async function deleteCollection(
+  id: string
+): Promise<{ status: string }> {
   const response = await fetch(`${API_BASE_URL}/api/v1/collections/${id}`, {
     method: "DELETE",
     headers: {
@@ -98,4 +100,3 @@ export async function deleteCollection(id: string): Promise<{ status: string }> 
 
   return data;
 }
-

@@ -169,8 +169,8 @@ export default function HomePage() {
                 <div className="space-y-3">
                   {collections.map((collection) => (
                     <div
-                      key={collection.id}
                       className="flex items-center justify-between rounded-lg border p-3"
+                      key={collection.id}
                     >
                       {editingId === collection.id ? (
                         <div className="flex flex-1 items-center gap-2">

@@ -16,15 +16,14 @@ export function middleware(request: NextRequest) {
   console.log("[Middleware] Path:", pathname);
   console.log("[Middleware] Session ID present:", isAuthenticated);
 
-  // Handle root path - redirect based on auth status
+  // Handle root path - show landing page for unauthenticated users
   if (pathname === "/") {
     if (isAuthenticated) {
       console.log("[Middleware] Root: Redirecting to /home (authenticated)");
       return NextResponse.redirect(new URL("/home", request.url));
-    } else {
-      console.log("[Middleware] Root: Redirecting to /login (not authenticated)");
-      return NextResponse.redirect(new URL("/login", request.url));
     }
+    // Let unauthenticated users see the landing page
+    return NextResponse.next();
   }
 
   // If user is accessing a protected route without session_id, redirect to login
@@ -34,7 +33,7 @@ export function middleware(request: NextRequest) {
 
   if (isProtectedRoute && !isAuthenticated) {
     console.log("[Middleware] Redirecting to login (no session)");
-    const loginUrl = new URL("/login", request.url);
+    const loginUrl = new URL("/", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }
